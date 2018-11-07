@@ -7,15 +7,15 @@ const
   app = express().use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 1337, function() { console.log('webhook is listening'+app.get('port')) } );
 
 // Server index page
 app.get("/", function (req, res) {
-  res.send("Deployed!");
+  res.send("Aqui estamos!");
 });
 
 // Creates the endpoint for our webhook 
-app.post('/webhook', (req, res) => {  
+app.post('/webhook/', (req, res) => {  
  
   let body = req.body;
 
@@ -41,7 +41,7 @@ app.post('/webhook', (req, res) => {
 });
 
 // Adds support for GET requests to our webhook
-app.get('/webhook', (req, res) => {
+app.get('/webhook/', (req, res) => {
 
   // Your verify token. Should be a random string.
   let VERIFY_TOKEN = "TE_QUIERO"
@@ -65,5 +65,6 @@ app.get('/webhook', (req, res) => {
       // Responds with '403 Forbidden' if verify tokens do not match
       res.sendStatus(403);      
     }
+    res.send("No entry! Pruebita :)");
   }
 });
