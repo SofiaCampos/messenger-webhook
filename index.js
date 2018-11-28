@@ -12,6 +12,31 @@ app.listen(process.env.PORT || 5000, function() { console.log('webhook is listen
 // Server index page
 app.get("/", function (req, res) {
   res.send("Aqui estamos!!!");
+
+  if (event.game_play) {
+  var senderId = event.sender.id; // Messenger sender id
+  var playerId = event.game_play.player_id; // Instant Games player id
+  var contextId = event.game_play.context_id; 
+  var payload = event.game_play.payload;
+  var playerWon = payload['playerWon'];
+  if (playerWon) {
+    sendMessage(
+      senderId, 
+      contextId, 
+      'Congratulations on your victory!', 
+      'Play Again'
+    );
+
+  } else {
+    sendMessage(
+      senderId, 
+      contextId, 
+      'Better luck next time!', 
+      'Rematch!'
+    );
+  }
+}
+
 });
 
 // Creates the endpoint for our webhook 
