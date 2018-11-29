@@ -20,6 +20,12 @@ app.get("/", function (req, res) {
     var contextId = event.game_play.context_id; 
     var payload = event.game_play.payload;
     var playerWon = payload['playerWon'];
+    sendMessage(
+        senderId, 
+        contextId, 
+        'Hey! Seguro que no quieres ver más ;)!', 
+        'Play Again'
+      );
     if (playerWon) {
       console.log("ganó");
       sendMessage(
