@@ -14,7 +14,7 @@ app.listen(process.env.PORT || 5000, function(){
 // Server index page
 app.get("/", function (req, res) {
   res.send("Aqui estamos Sofi!!");
-
+  /*
   if (event.game_play) {
     console.log("get out of instant game");
     var senderId = event.sender.id; // Messenger sender id
@@ -46,7 +46,7 @@ app.get("/", function (req, res) {
       );
     }
   }
-
+  */
 });
 
 // Adds support for GET requests to our webhook
