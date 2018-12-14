@@ -11,7 +11,7 @@ app.listen(process.env.PORT || 5000, function() { console.log('webhook is listen
 
 // Server index page
 app.get("/", function (req, res) {
-  res.send("Aqui estamos!!!");
+  res.send("Aqui estamos!!");
 
   if (event.game_play) {
     console.log("get out of instant game");
