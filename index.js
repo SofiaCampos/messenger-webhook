@@ -223,7 +223,7 @@ function sendMessageAux(player, context, message, cta) {
                     elements: [
                     {
                         title: message,
-                        image_url: "https://apps-308084433059751.apps.fbsbx.com/instant-bundle/2404218909618606/1987985297950026/apps/tus-gustos/tus-gustos_full.png",
+                        //image_url: "https://apps-308084433059751.apps.fbsbx.com/instant-bundle/2404218909618606/1987985297950026/apps/tus-gustos/tus-gustos_full.png",
                         buttons: [button]
                     }
                     ]
