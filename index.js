@@ -50,7 +50,7 @@ app.get("/", function (req, res) {
 });
 
 // Adds support for GET requests to our webhook
-app.get('/webhook/', (req, res) => {
+app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
   let VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
@@ -81,7 +81,7 @@ app.get('/webhook/', (req, res) => {
 });
 
 // Creates the endpoint for our webhook 
-app.post('/webhook/', (req, res) => {  
+app.post('/webhook', (req, res) => {  
  
   let body = req.body;
   console.log('received bot webhook');
@@ -128,28 +128,29 @@ function receivedMessage(event) {
 // Handle game_play (when player closes game) events here. 
 //
 function receivedGameplay(event) {
-    // Page-scoped ID of the bot user
-    var senderId = event.sender.id; 
+  console.log("Sofi Webhook received gameplay event: ", event);
+  // Page-scoped ID of the bot user
+  var senderId = event.sender.id; 
 
-    // FBInstant player ID
-    var playerId = event.game_play.player_id; 
+  // FBInstant player ID
+  var playerId = event.game_play.player_id; 
 
-    // FBInstant context ID 
-    var contextId = event.game_play.context_id;
+  // FBInstant context ID 
+  var contextId = event.game_play.context_id;
 
-    // Check for payload
-    if (event.game_play.payload) {
-        //
-        // The variable payload here contains data set by
-        // FBInstant.setSessionData()
-        //
-        var payload = JSON.parse(event.game_play.payload);
+  // Check for payload
+  if (event.game_play.payload) {
+      //
+      // The variable payload here contains data set by
+      // FBInstant.setSessionData()
+      //
+      var payload = JSON.parse(event.game_play.payload);
 
-        // In this example, the bot is just "echoing" the message received
-        // immediately. In your game, you'll want to delay the bot messages
-        // to remind the user to play 1, 3, 7 days after game play, for example.
-        sendMessage(senderId, null, "Quieres juagr de nuevo?", "Jugar!", payload);
-    }
+      // In this example, the bot is just "echoing" the message received
+      // immediately. In your game, you'll want to delay the bot messages
+      // to remind the user to play 1, 3, 7 days after game play, for example.
+      sendMessage(senderId, null, "Quieres juagr de nuevo?", "Jugar!", payload);
+  }
 }
 
 //
