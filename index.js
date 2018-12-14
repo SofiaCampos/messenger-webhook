@@ -51,7 +51,7 @@ app.get("/", function (req, res) {
 });
 
 // Adds support for GET requests to our webhook
-app.get('/bot', (req, res) => {
+app.get('/bote', (req, res) => {
 
   // Your verify token. Should be a random string.
   let VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
@@ -82,7 +82,7 @@ app.get('/bot', (req, res) => {
 });
 
 // Creates the endpoint for our webhook 
-app.post('/bot', (req, res) => {  
+app.post('/bote', (req, res) => {  
  
   let body = req.body;
   console.log('received bot webhook');
