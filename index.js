@@ -121,7 +121,37 @@ app.post('/webhook', (req, res) => {
 // Handle messages sent by player directly to the game bot here
 //
 function receivedMessage(event) {
-  
+  if (!event.message.is_echo) {
+    var message = event.message;
+    var senderId = event.sender.id;
+
+    console.log("Received message from senderId: " + senderId);
+    console.log("Message is: " + JSON.stringify(message));
+
+    // You may get a text or attachment but not both
+    if (message.text) {
+      var formattedMsg = message.text.toLowerCase().trim();
+
+      // If we receive a text message, check to see if it matches any special
+      // keywords and send back the corresponding movie detail.
+      // Otherwise, search for new movie.
+      switch (formattedMsg) {
+        case "hla!":
+        case "hola!":
+        case "hi!":
+        case "hi":
+        case "hello":
+        case "hola":
+          sendMessageText(senderId, "Hola! Gracias por saludarnos");
+          break;
+
+        default:
+          sendMessageText(senderId, "Hola! Ahora estamos algo ocupados! Cuéntanos tu duda o consulta. A penas podamos, te responderemos! Que tengas un estupendo día!");
+      }
+    } else if (message.attachments) {
+      sendMessage(senderId, {text: "Sorry. No entiendo lo que quieres decir :("});
+    }
+  }
 }
 
 //
@@ -156,6 +186,24 @@ function receivedGameplay(event) {
     sendMessageAux(senderId, null, "Quieres jugar de nuevo?", "Jugar!");
   }
 }
+
+// sends message to user
+function sendMessageText(recipientId, message) {
+  request({
+    url: "https://graph.facebook.com/v2.6/me/messages",
+    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+    method: "POST",
+    json: {
+      recipient: {id: recipientId},
+      message: message,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log("Error sending message: " + response.error);
+    }
+  });
+}
+
 
 //
 // Send bot message
