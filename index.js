@@ -153,6 +153,7 @@ function receivedGameplay(event) {
     sendMessage(senderId, null, "Quieres juagr de nuevo?", "Jugar!", payload);
   }else{
     console.log("No hay payload");
+    sendMessageAux(senderId, null, "Quieres juagr de nuevo?", "Jugar!");
   }
 }
 
@@ -177,6 +178,39 @@ function sendMessage(player, context, message, cta, payload) {
     if (payload) {
         button.payload = JSON.stringify(payload)
     }
+    var messageData = {
+        recipient: {
+            id: player
+        },
+        message: {
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "generic",
+                    elements: [
+                    {
+                        title: message,
+                        buttons: [button]
+                    }
+                    ]
+                }
+            }
+        }
+    };
+
+    callSendAPI(messageData);
+
+}
+function sendMessageAux(player, context, message, cta) {
+    var button = {
+        type: "game_play",
+        title: cta
+    };
+
+    if (context) {
+        button.context = context;
+    }
+
     var messageData = {
         recipient: {
             id: player
