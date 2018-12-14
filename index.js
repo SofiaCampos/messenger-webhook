@@ -5,7 +5,7 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
-
+var request = require('request');
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 5000, function(){ 
   console.log('webhook is listening '+app.get('port')) 
@@ -237,18 +237,18 @@ function sendMessageAux(player, context, message, cta) {
 
 function callSendAPI(messageData) {
   console.log("A enviar mensaje para que vuelva  a jugar!");
-    var graphApiUrl = 'https://graph.facebook.com/me/messages?access_token='+process.env.FB_ACCESS_TOKEN;
-    request({
-        url: graphApiUrl,
-        method: "POST",
-        json: true,  
-        body: messageData
-    }, function (error, response, body){
-      if (!err) {
-        console.log('Mensaje enviado!')
-      } else {
-        console.error("No se puedo enviar el mensaje:" + err);
-      }
-      console.error('Sofi send api returned', 'error', error, 'status code', response.statusCode, 'body', body);
-    });
+  var graphApiUrl = 'https://graph.facebook.com/me/messages?access_token='+process.env.FB_ACCESS_TOKEN;
+  request({
+      url: graphApiUrl,
+      method: "POST",
+      json: true,  
+      body: messageData
+  }, function (error, response, body){
+    if (!err) {
+      console.log('Mensaje enviado!')
+    } else {
+      console.error("No se puedo enviar el mensaje:" + err);
+    }
+    console.error('Sofi send api returned', 'error', error, 'status code', response.statusCode, 'body', body);
+  });
 }
