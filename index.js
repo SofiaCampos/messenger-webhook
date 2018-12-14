@@ -199,13 +199,14 @@ function sendMessage(player, context, message, cta, payload) {
 }
 
 function callSendAPI(messageData) {
-    var graphApiUrl = 'https://graph.facebook.com/me/messages?access_token='+process.env.FB_ACCESS_TOKEN;
+  console.log("A enviar mensaje para que vuelva  a jugar!");
+    var graphApiUrl = 'https://graph.facebook.com/me/messages?access_token='+ACCESS_TOKEN;
     request({
         url: graphApiUrl,
         method: "POST",
         json: true,  
         body: messageData
     }, function (error, response, body){
-        console.error('send api returned', 'error', error, 'status code', response.statusCode, 'body', body);
+        console.error('Sofi send api returned', 'error', error, 'status code', response.statusCode, 'body', body);
     });
 }
