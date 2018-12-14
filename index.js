@@ -98,7 +98,8 @@ app.post('/bot', (req, res) => {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
           if (event.message) {
-              receivedMessage(event);
+            console.log("Solo envio mensaje de texto");
+              //receivedMessage(event);
           } else if (event.game_play) {
               receivedGameplay(event);
           } else {
@@ -159,7 +160,7 @@ function receivedMessage(event) {
 // Handle game_play (when player closes game) events here. 
 //
 function receivedGameplay(event) {
-  console.log("Sofi sofi Webhook received gameplay event: ", event);
+  console.log("Soficita Webhook received gameplay event: ", event);
   // Page-scoped ID of the bot user
   var senderId = event.sender.id; 
 
@@ -226,7 +227,7 @@ function sendMessage(player, context, message, cta, payload) {
         button.context = context;
     }
     if (payload) {
-        button.payload = JSON.stringify(payload)
+        button.payload = JSON.stringify(payload);
     }
     var messageData = {
         recipient: {
@@ -271,11 +272,10 @@ function sendMessageAux(player, context, message, cta) {
                 payload: {
                     template_type: "generic",
                     elements: [
-                    {
+                      {
                         title: message,
-                        //image_url: "https://apps-308084433059751.apps.fbsbx.com/instant-bundle/2404218909618606/1987985297950026/apps/tus-gustos/tus-gustos_full.png",
                         buttons: [button]
-                    }
+                      }
                     ]
                 }
             }
@@ -296,7 +296,7 @@ function callSendAPI(messageData) {
       body: messageData
   }, function (error, response, body){
     if (!error) {
-      console.log('Mensaje enviado!')
+      console.log('Mensaje enviado!');
     } else {
       console.error("No se puedo enviar el mensaje:" + error);
     }
