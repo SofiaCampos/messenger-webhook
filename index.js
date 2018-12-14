@@ -244,10 +244,10 @@ function callSendAPI(messageData) {
       json: true,  
       body: messageData
   }, function (error, response, body){
-    if (!err) {
+    if (!error) {
       console.log('Mensaje enviado!')
     } else {
-      console.error("No se puedo enviar el mensaje:" + err);
+      console.error("No se puedo enviar el mensaje:" + error);
     }
     console.error('Sofi send api returned', 'error', error, 'status code', response.statusCode, 'body', body);
   });
