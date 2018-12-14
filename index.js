@@ -237,7 +237,7 @@ function sendMessageAux(player, context, message, cta) {
 
 function callSendAPI(messageData) {
   console.log("A enviar mensaje para que vuelva  a jugar!");
-    var graphApiUrl = 'https://graph.facebook.com/me/messages?access_token='+ACCESS_TOKEN;
+    var graphApiUrl = 'https://graph.facebook.com/me/messages?access_token='+process.env.FB_ACCESS_TOKEN;
     request({
         url: graphApiUrl,
         method: "POST",
