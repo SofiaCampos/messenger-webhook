@@ -151,6 +151,8 @@ function receivedGameplay(event) {
     // to remind the user to play 1, 3, 7 days after game play, for example.
     console.log("Vamos a enviar un mensaje por que el jugador acaba de salir del juego");
     sendMessage(senderId, null, "Quieres juagr de nuevo?", "Jugar!", payload);
+  }else{
+    console.log("No hay payload");
   }
 }
 
