@@ -128,7 +128,7 @@ function receivedMessage(event) {
 // Handle game_play (when player closes game) events here. 
 //
 function receivedGameplay(event) {
-  console.log("Sofi Webhook received gameplay event: ", event);
+  console.log("Sofi sofi Webhook received gameplay event: ", event);
   // Page-scoped ID of the bot user
   var senderId = event.sender.id; 
 
@@ -140,16 +140,17 @@ function receivedGameplay(event) {
 
   // Check for payload
   if (event.game_play.payload) {
-      //
-      // The variable payload here contains data set by
-      // FBInstant.setSessionData()
-      //
-      var payload = JSON.parse(event.game_play.payload);
+    //
+    // The variable payload here contains data set by
+    // FBInstant.setSessionData()
+    //
+    var payload = JSON.parse(event.game_play.payload);
 
-      // In this example, the bot is just "echoing" the message received
-      // immediately. In your game, you'll want to delay the bot messages
-      // to remind the user to play 1, 3, 7 days after game play, for example.
-      sendMessage(senderId, null, "Quieres juagr de nuevo?", "Jugar!", payload);
+    // In this example, the bot is just "echoing" the message received
+    // immediately. In your game, you'll want to delay the bot messages
+    // to remind the user to play 1, 3, 7 days after game play, for example.
+    console.log("Vamos a enviar un mensaje por que el jugador acaba de salir del juego");
+    sendMessage(senderId, null, "Quieres juagr de nuevo?", "Jugar!", payload);
   }
 }
 
@@ -207,6 +208,11 @@ function callSendAPI(messageData) {
         json: true,  
         body: messageData
     }, function (error, response, body){
-        console.error('Sofi send api returned', 'error', error, 'status code', response.statusCode, 'body', body);
+      if (!err) {
+        console.log('Mensaje enviado!')
+      } else {
+        console.error("No se puedo enviar el mensaje:" + err);
+      }
+      console.error('Sofi send api returned', 'error', error, 'status code', response.statusCode, 'body', body);
     });
 }
