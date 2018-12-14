@@ -7,6 +7,7 @@ const
   app = express().use(bodyParser.json()); // creates express http server
 var request = require('request');
 // Sets server port and logs message on success
+console.log("Puerto env: "+process.env.PORT);
 app.listen(process.env.PORT || 5000, function(){ 
   console.log('webhook is listening '+app.get('port')) 
 });
@@ -167,6 +168,7 @@ function receivedGameplay(event) {
 
   // FBInstant context ID 
   var contextId = event.game_play.context_id;
+  console.log("contextId: "+contextId);
 
   // Check for payload
   if (event.game_play.payload) {
