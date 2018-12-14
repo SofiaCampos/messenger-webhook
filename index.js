@@ -199,7 +199,7 @@ function sendMessage(player, context, message, cta, payload) {
 }
 
 function callSendAPI(messageData) {
-    var graphApiUrl = 'https://graph.facebook.com/me/messages?access_token='+process.env.PAGE_ACCESS_TOKEN;
+    var graphApiUrl = 'https://graph.facebook.com/me/messages?access_token='+process.env.FB_ACCESS_TOKEN;
     request({
         url: graphApiUrl,
         method: "POST",
