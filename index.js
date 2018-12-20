@@ -14,44 +14,11 @@ app.listen(process.env.PORT || 5000, function(){
 
 // Server index page
 app.get("/", function (req, res) {
-  res.send("Aqui estamos Sofi!!");
-  /*
-  if (event.game_play) {
-    console.log("get out of instant game");
-    var senderId = event.sender.id; // Messenger sender id
-    var playerId = event.game_play.player_id; // Instant Games player id
-    var contextId = event.game_play.context_id; 
-    var payload = event.game_play.payload;
-    var playerWon = payload['playerWon'];
-    sendMessage(
-        senderId, 
-        contextId, 
-        'Hey! Seguro que no quieres ver más ;)!', 
-        'Play Again'
-      );
-    if (playerWon) {
-      console.log("ganó");
-      sendMessage(
-        senderId, 
-        contextId, 
-        'Congratulations on your victory!', 
-        'Play Again'
-      );
-
-    } else {
-      sendMessage(
-        senderId, 
-        contextId, 
-        'Better luck next time!', 
-        'Rematch!'
-      );
-    }
-  }
-  */
+  res.send("Aqui estamos Sofix!!");
 });
 
 // Adds support for GET requests to our webhook
-app.get('/webhook', (req, res) => {
+app.get('/webhook/', (req, res) => {
 
   // Your verify token. Should be a random string.
   let VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
@@ -82,7 +49,7 @@ app.get('/webhook', (req, res) => {
 });
 
 // Creates the endpoint for our webhook 
-app.post('/webhook', (req, res) => {  
+app.post('/webhook/', (req, res) => {  
  
   let body = req.body;
   console.log('received bot webhook');
@@ -98,7 +65,7 @@ app.post('/webhook', (req, res) => {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
           if (event.message) {
-            console.log("Solo envio mensaje de texto");
+            console.log("Solo envió mensaje de texto");
               //receivedMessage(event);
           } else if (event.game_play) {
               receivedGameplay(event);
@@ -171,6 +138,8 @@ function receivedGameplay(event) {
   var contextId = event.game_play.context_id;
   console.log("contextId: "+contextId);
 
+  
+
   // Check for payload
   if (event.game_play.payload) {
     //
@@ -178,7 +147,7 @@ function receivedGameplay(event) {
     // FBInstant.setSessionData()
     //
     var payload = JSON.parse(event.game_play.payload);
-
+    console.log("Payload: "+JSON.stringify(payload));
     // In this example, the bot is just "echoing" the message received
     // immediately. In your game, you'll want to delay the bot messages
     // to remind the user to play 1, 3, 7 days after game play, for example.
@@ -281,9 +250,7 @@ function sendMessageAux(player, context, message, cta) {
             }
         }
     };
-
     callSendAPI(messageData);
-
 }
 
 function callSendAPI(messageData) {
