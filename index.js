@@ -14,7 +14,7 @@ app.listen(process.env.PORT || 5000, function(){
 
 // Server index page
 app.get("/", function (req, res) {
-  res.send("Aqui estamos Sofix!!");
+  res.send("Aqui estamos Soficita!!");
 });
 
 // Adds support for GET requests to our webhook
